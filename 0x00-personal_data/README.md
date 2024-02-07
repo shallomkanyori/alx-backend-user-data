@@ -42,3 +42,14 @@ Update the class to accept a list of strings `fields` constructor argument.
 Implement the `format` method to filter values in incoming log records using `filter_datum`. Values for fields in `fields` should be filtered.
 
 DO NOT extrapolate `FORMAT` manually. The `format` method should be less than 5 lines long.
+
+### Task 2
+File: [filtered_logger.py](filtered_logger.py)
+
+Use [user_data.csv](user_data.csv) for this task
+
+Implement a `get_logger` function that takes no arguments and returns a `logging.Logger` object.
+
+The logger should be named `"user_data"` and only log up to `logging.INFO` level. It should not propagate messages to other loggers. It should have a `StreamHandler` with `RedactingFormatter` as formatter.
+
+Create a tuple `PII_FIELDS` constant at the root of the module containing the fields from `user_data.csv` that are considered PII. `PII_FIELDS` can contain only 5 fields - choose the right list of fields that can are considered as “important” PIIs or information that you must hide in your logs. Use it to parameterize the formatter.
