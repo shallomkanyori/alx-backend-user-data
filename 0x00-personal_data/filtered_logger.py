@@ -8,6 +8,7 @@ Functions:
     filter_datum(fields, redaction, message, separator)
     get_logger()
     get_db()
+    main()
 
 Attributes:
     PII_FIELDS
@@ -15,8 +16,8 @@ Attributes:
 import re
 from typing import List
 import logging
-import mysql.connector
 import os
+import mysql.connector
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
@@ -77,3 +78,21 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
                                    database=db_name)
 
     return conn
+
+
+def main() -> None:
+    """Reads and displays all row from the users table filtered."""
+
+    db = get_db()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM users;")
+
+    logger = get_logger()
+    columns = cursor.column_names
+    for row in cursor:
+        s = " ".join("{}={};".format(k, v) for k, v in zip(columns, row))
+        logger.info(s)
+
+
+if __name__ == "__main__":
+    main()
