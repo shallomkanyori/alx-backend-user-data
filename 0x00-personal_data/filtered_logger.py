@@ -7,6 +7,7 @@ Classes:
 Functions:
     filter_datum(fields, redaction, message, separator)
     get_logger()
+    get_db()
 
 Attributes:
     PII_FIELDS
@@ -63,12 +64,16 @@ def get_logger() -> logging.Logger:
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
-    """Returns a connector to a given database"""
+    """Returns a connection to a given database"""
 
     db_user = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
     db_pwd = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
     db_host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
     db_name = os.getenv("PERSONAL_DATA_DB_NAME")
 
-    return mysql.connector.connect(user=db_user, password=db_pwd, host=db_host,
+    conn = mysql.connector.connect(user=db_user,
+                                   password=db_pwd,
+                                   host=db_host,
                                    database=db_name)
+
+    return conn
