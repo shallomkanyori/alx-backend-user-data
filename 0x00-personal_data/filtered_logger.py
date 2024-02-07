@@ -48,6 +48,7 @@ def get_logger() -> logging.Logger:
     """Returns a logger that obfuscates certain given fields"""
 
     logger = logging.get_logger("user_data")
+    logger.propagate = False
     logger.setLevel(logging.INFO)
 
     formatter = RedactingFormatter(PII_FIELDS)
