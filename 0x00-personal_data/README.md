@@ -85,3 +85,12 @@ Filtered fields:
 - password
 
 Only your main function should run when the module is executed.
+
+### Task 5
+File: [encrypt_password.py](encrypt_password.py)
+
+User passwords should NEVER be stored in plain text in a database.
+
+Implement a `hash_password` function that expects one string argument named `password` and returns a salted, hashed password, which is a byte string.
+
+Use the `bcrypt` package to perform the hashing (with `hashpw`).
