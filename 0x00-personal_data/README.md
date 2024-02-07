@@ -94,3 +94,13 @@ User passwords should NEVER be stored in plain text in a database.
 Implement a `hash_password` function that expects one string argument named `password` and returns a salted, hashed password, which is a byte string.
 
 Use the `bcrypt` package to perform the hashing (with `hashpw`).
+
+### Task 6
+File: [encrypt_password.py](encrypt_password.py)
+
+Implement an `is_valid` function that expects 2 arguments and returns a boolean.
+Arguments:
+- `hashed_password`: bytes type
+- `password`: string type
+
+Use `bcrypt` to validate that the provided password matches the hashed password.
