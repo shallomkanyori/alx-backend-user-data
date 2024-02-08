@@ -93,6 +93,9 @@ def main() -> None:
         s = " ".join("{}={};".format(k, v) for k, v in zip(columns, row))
         logger.info(s)
 
+    cursor.close()
+    db.close()
+
 
 if __name__ == "__main__":
     main()
