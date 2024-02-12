@@ -29,6 +29,10 @@ class Auth():
         if path in excluded_paths or (path + '/') in excluded_paths:
             return False
 
+        for ep in excluded_paths:
+            if ep[-1] == '*' and path.startswith(ep[:-1]):
+                return False
+
         return True
 
     def authorization_header(self, request=None) -> str:
