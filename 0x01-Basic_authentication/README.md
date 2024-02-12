@@ -79,3 +79,11 @@ Update `api/v1/app.py` to use `BasicAuth` class instead of `Auth` depending of t
 - create an instance of `BasicAuth` and assign it to the variable `auth`
 
 Otherwise, keep the previous mechanism with `auth` as an instance of `Auth`.
+
+### Task 7
+Add the method `def extract_base64_authorization_header(self, authorization_header: str) -> str:` in the class `BasicAuth` that returns the Base64 part of the Authorization header for a Basic Authentication:
+- Return `None` if `authorization_header` is `None`
+- Return `None` if `authorization_header` is not a string
+- Return `None` if `authorization_header` doesn’t start with `Basic` (with a space at the end)
+- Otherwise, return the value after `Basic` (after the space)
+- You can assume `authorization_header` contains only one `Basic`
