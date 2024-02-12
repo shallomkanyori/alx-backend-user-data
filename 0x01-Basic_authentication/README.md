@@ -121,3 +121,8 @@ Add the method `def current_user(self, request=None) -> TypeVar('User')` in the 
 - You must use `user_object_from_credentials`
 
 With this update, now your API is fully protected by a Basic Authentication.
+
+## Advanced
+
+### Task 12
+Improve the method `def extract_user_credentials(self, decoded_base64_authorization_header)` to allow password with `:`.
