@@ -12,8 +12,24 @@ class Auth():
     """Auth class"""
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """To be implemented"""
-        return False
+        """Checks if a path requires authorization.
+
+        Args:
+            path (str): the path to check.
+            excluded_paths (list of str): paths that don't need authorization
+                                          (end-slash tolerant).
+        """
+
+        if path is None:
+            return True
+
+        if excluded_paths is None or len(excluded_paths) == 0:
+            return True
+
+        if path in excluded_paths or (path + '/') in excluded_paths:
+            return False
+
+        return True
 
     def authorization_header(self, request=None) -> str:
         """To be implemented"""
