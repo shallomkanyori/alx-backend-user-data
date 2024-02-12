@@ -48,3 +48,25 @@ Update the method `def require_auth(self, path: str, excluded_paths: List[str]) 
 - Returns `False` if `path` is in `excluded_paths`
 - You can assume `excluded_paths` contains string path always ending by a `/`
 - This method must be slash tolerant: `path=/api/v1/status` and `path=/api/v1/status/` must be returned `False` if `excluded_paths` contains `/api/v1/status/`
+
+### Task 5
+Validate all requests to secure the API:
+
+Update the method `def authorization_header(self, request=None) -> str:` in `api/v1/auth/auth.py`:
+- If `request` is `None`, return `None`
+- If `request` doesn’t contain the header key `Authorization`, return `None`
+- Otherwise, return the value of the header request `Authorization`
+
+Update the file `api/v1/app.py`:
+- Create a variable `auth` initialized to `None` after the `CORS` definition
+- Based on the environment variable `AUTH_TYPE`, load and assign the right instance of authentication to `auth`
+	- if `auth`:
+		- import `Auth` from `api.v1.auth.auth`
+		- create an instance of `Auth` and assign it to the variable `auth`
+
+Now the biggest piece is the filtering of each request. For that you will use the Flask method `before_request`
+- Add a method in `api/v1/app.py` to handle `before_request`
+	- if `auth` is `None`, do nothing
+	- if `request.path` is not part of this list `['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']`, do nothing - you must use the method `require_auth` from the `auth` instance
+	- if `auth.authorization_header(request)` returns `None`, raise the error `401` - you must use `abort`
+	- if `auth.current_user(request)` returns `None`, raise the error `403` - you must use `abort`
