@@ -70,3 +70,12 @@ Now the biggest piece is the filtering of each request. For that you will use th
 	- if `request.path` is not part of this list `['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']`, do nothing - you must use the method `require_auth` from the `auth` instance
 	- if `auth.authorization_header(request)` returns `None`, raise the error `401` - you must use `abort`
 	- if `auth.current_user(request)` returns `None`, raise the error `403` - you must use `abort`
+
+### Task 6
+Create a class `BasicAuth` that inherits from `Auth`. For the moment this class will be empty.
+
+Update `api/v1/app.py` to use `BasicAuth` class instead of `Auth` depending of the value of the environment variable `AUTH_TYPE`. If `AUTH_TYPE` is equal to `basic_auth`:
+- import `BasicAuth` from `api.v1.auth.basic_auth`
+- create an instance of `BasicAuth` and assign it to the variable `auth`
+
+Otherwise, keep the previous mechanism with `auth` as an instance of `Auth`.
