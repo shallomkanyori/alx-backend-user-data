@@ -87,3 +87,10 @@ Add the method `def extract_base64_authorization_header(self, authorization_head
 - Return `None` if `authorization_header` doesn’t start with `Basic` (with a space at the end)
 - Otherwise, return the value after `Basic` (after the space)
 - You can assume `authorization_header` contains only one `Basic`
+
+### Task 8
+Add the method `def decode_base64_authorization_header(self, base64_authorization_header: str) -> str:` in the class `BasicAuth` that returns the decoded value of a Base64 string `base64_authorization_header`:
+- Return `None` if `base64_authorization_header` is `None`
+- Return `None` if `base64_authorization_header` is not a string
+- Return `None` if `base64_authorization_header` is not a valid Base64 - you can use `try/except`
+- Otherwise, return the decoded value as UTF8 string - you can use `decode('utf-8')`
