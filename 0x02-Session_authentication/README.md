@@ -54,3 +54,12 @@ Building on the work from [0x06. Basic authentication](../0x06-Basic_authenticat
 	- If `<user_id>` is equal to `me` and `request.current_user` is `None`: `abort(404)`
 	- If `<user_id>` is equal to `me` and `request.current_user` is not `None`: return the authenticated `User` in a JSON response (like a normal case of `GET /api/v1/users/<user_id>` where `<user_id>` is a valid `User` ID)
 	- Otherwise, keep the same behavior
+
+### Task 1
+Create a class `SessionAuth` that inherits from `Auth`. For the moment this class will be empty. It’s the first step for creating a new authentication mechanism.
+
+Update `api/v1/app.py` for using `SessionAuth` instance for the variable `auth` depending of the value of the environment variable `AUTH_TYPE`, If `AUTH_TYPE` is equal to `session_auth`:
+- import `SessionAuth` from `api.v1.auth.session_auth`
+- create an instance of S`essionAuth` and assign it to the variable `auth`
+
+Otherwise, keep the previous mechanism.
