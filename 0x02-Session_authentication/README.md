@@ -63,3 +63,15 @@ Update `api/v1/app.py` for using `SessionAuth` instance for the variable `auth` 
 - create an instance of S`essionAuth` and assign it to the variable `auth`
 
 Otherwise, keep the previous mechanism.
+
+### Task 2
+Update `SessionAuth` class:
+- Create a class attribute `user_id_by_session_id` initialized by an empty dictionary
+- Create an instance method `def create_session(self, user_id: str = None) -> str:` that creates a Session ID for a `user_id`:
+	- Return `None` if `user_id` is `None`
+	- Return `None` if `user_id` is not a string
+	- Otherwise:
+		- Generate a Session ID using `uuid` module and `uuid4()`
+		- Use this Session ID as key of the dictionary `user_id_by_session_id` - the value for this key must be `user_id`
+		- Return the Session ID
+	- The same `user_id` can have multiple Session ID - the `user_id` is the value in the dictionary `user_id_by_session_id`
