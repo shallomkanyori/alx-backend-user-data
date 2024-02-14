@@ -95,3 +95,9 @@ Update `api/v1/auth/auth.py` by adding the method `def session_cookie(self, requ
 Update the `@app.before_request` method in `api/v1/app.py`:
 - Add the URL path `/api/v1/auth_session/login/` in the list of excluded paths of the method `require_auth` - this route doesn’t exist yet but it should be accessible outside authentication
 - If `auth.authorization_header(request)` and `auth.session_cookie(request)` return `None`, `abort(401)`
+
+### Task 6
+Update `SessionAuth` class:
+Create an instance method `def current_user(self, request=None):` (overload) that returns a `User` instance based on a cookie value:
+- You must use `self.session_cookie(...)` and `self.user_id_for_session_id(...)` to return the User ID based on the cookie `_my_session_id`
+- By using this User ID, you will be able to retrieve a `User` instance from the database - you can use `User.get(...)` for retrieving a `User` from the database.
