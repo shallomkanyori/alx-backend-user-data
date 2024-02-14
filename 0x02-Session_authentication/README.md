@@ -42,3 +42,15 @@ $ API_HOST=0.0.0.0 API_PORT=5000 python3 -m api.v1.app
 - `PUT /api/v1/users/:id`: updates an user based on the ID (JSON parameters: `last_name` and `first_name`)
 
 # Session Authentication
+
+## Tasks
+
+### Task 0
+Building on the work from [0x06. Basic authentication](../0x06-Basic_authentication), add a new endpoint: `GET /users/me` to retrieve the authenticated `User` object.
+- Copy folders `models` and `api` from the previous project.
+- Update `@app.before_request` in `api/v1/app.py`:
+	- Assign the result of `auth.current_user(request)` to `request.current_user`
+- Update method for the route `GET /api/v1/users/<user_id>` in `api/v1/views/users.py`:
+	- If `<user_id>` is equal to `me` and `request.current_user` is `None`: `abort(404)`
+	- If `<user_id>` is equal to `me` and `request.current_user` is not `None`: return the authenticated `User` in a JSON response (like a normal case of `GET /api/v1/users/<user_id>` where `<user_id>` is a valid `User` ID)
+	- Otherwise, keep the same behavior
