@@ -75,3 +75,11 @@ Update `SessionAuth` class:
 		- Use this Session ID as key of the dictionary `user_id_by_session_id` - the value for this key must be `user_id`
 		- Return the Session ID
 	- The same `user_id` can have multiple Session ID - the `user_id` is the value in the dictionary `user_id_by_session_id`
+
+### Task 3
+Update `SessionAuth` class:
+Create an instance method `def user_id_for_session_id(self, session_id: str = None) -> str:` that returns a `User` ID based on a Session ID:
+- Return `None` if `session_id` is `None`
+- Return `None` if `session_id` is not a string
+- Return the value (the User ID) for the key `session_id` in the dictionary `user_id_by_session_id`.
+- You must use `.get()` built-in for accessing in a dictionary a value based on key
