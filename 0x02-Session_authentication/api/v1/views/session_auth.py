@@ -10,8 +10,7 @@ import os
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def login() -> str:
     """ POST /api/v1/auth_session/login
-    Return:
-      - list of all User objects JSON represented
+    Login to user session
     """
     email = request.form.get("email")
     password = request.form.get("password")
@@ -48,3 +47,19 @@ def login() -> str:
 
     except KeyError:
         return jsonify({"error": "no user found for this email"}), 404
+
+
+@app_views.route('/auth_session/logout', methods=['DELETE'],
+                 strict_slashes=False)
+def logout() -> str:
+    """ DELETE /api/v1/auth_session/logout
+    Logout from user session
+    """
+
+    from api.v1.app import auth
+    success = auth.destroy_session(request)
+
+    if not success:
+        abort(404)
+
+    return jsonify({}), 200
