@@ -101,3 +101,22 @@ Update `SessionAuth` class:
 Create an instance method `def current_user(self, request=None):` (overload) that returns a `User` instance based on a cookie value:
 - You must use `self.session_cookie(...)` and `self.user_id_for_session_id(...)` to return the User ID based on the cookie `_my_session_id`
 - By using this User ID, you will be able to retrieve a `User` instance from the database - you can use `User.get(...)` for retrieving a `User` from the database.
+
+### Task 7
+Create a new Flask view that handles all routes for the Session authentication.
+
+In the file `api/v1/views/session_auth.py`, create a route `POST /auth_session/login`:
+- Slash tolerant (`/auth_session/login` == `/auth_session/login/`)
+- You must use `request.form.get()` to retrieve `email` and `password` parameters
+- If `email` is missing or empty, return the JSON `{ "error": "email missing" }` with the status code `400`
+- If `password` is missing or empty, return the JSON `{ "error": "password missing" }` with the status code `400`
+- Retrieve the `User` instance based on the `email` - you must use the class method `search` of `User`
+	- If no `User` found, return the JSON `{ "error": "no user found for this email" }` with the status code `404`
+	- If the `password` is not the one of the `User` found, return the JSON `{ "error": "wrong password" }` with the status code `401` - you must use `is_valid_password` from the `User` instance
+	- Otherwise, create a Session ID for the `User` ID:
+		- You must use from `api.v1.app import auth` - WARNING: please import it only where you need it - not on top of the file (can generate circular import - and break first tasks of this project)
+		- You must use `auth.create_session(..)` for creating a Session ID
+		- Return the dictionary representation of the `User` - you must use `to_json()` method from `User`
+		- You must set the cookie to the response - you must use the value of the environment variable `SESSION_NAME` as cookie name
+
+In the file `api/v1/views/__init__.py`, you must add this new view.
