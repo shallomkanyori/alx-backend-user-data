@@ -66,3 +66,22 @@ If an argument that does not correspond to a user attribute is passed, raise a `
 Define a `_hash_password` function that takes in a `password` string arguments and returns bytes.
 
 The returned bytes is a salted hash of the input password, hashed with `bcrypt.hashpw`.
+
+### Task 5
+Implement the `Auth.register_user` in the `Auth` class provided below:
+```
+from db import DB
+
+
+class Auth:
+    """Auth class to interact with the authentication database.
+    """
+
+    def __init__(self):
+        self._db = DB()
+```
+Note that `Auth._db` is a private property and should NEVER be used from outside the class.
+
+`Auth.register_user` should take mandatory `email` and `password` string arguments and return a `User` object.
+If a user already exist with the passed email, raise a `ValueError` with the message `User <user's email> already exists`.
+If not, hash the password with `_hash_password`, save the user to the database using `self._db` and return the `User` object.
