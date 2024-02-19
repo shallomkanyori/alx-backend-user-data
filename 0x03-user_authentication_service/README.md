@@ -179,3 +179,8 @@ The request is expected to contain a `session_id` cookie. Use it to find the use
 {"email": "<user email>"}
 ```
 If the session ID is invalid or the user does not exist, respond with a 403 HTTP status.
+
+### Task 16
+Implement the `Auth.get_reset_password_token` method. It takes an `email` string argument and returns a string.
+
+Find the user corresponding to the email. If the user does not exist, raise a `ValueError` exception. If it exists, generate a UUID and update the user’s `reset_token` database field. Return the token.
