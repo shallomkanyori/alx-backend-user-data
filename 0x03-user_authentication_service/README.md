@@ -163,3 +163,10 @@ Implement `Auth.destroy_session`. The method takes a single `user_id` integer ar
 The method updates the corresponding user’s session ID to `None`.
 
 Remember to only use public methods of `self._db`.
+
+### Task 14
+Implement a `logout` function to respond to the `DELETE /sessions` route.
+
+The request is expected to contain the session ID as a cookie with key `"session_id"`.
+
+Find the user with the requested session ID. If the user exists destroy the session and redirect the user to `GET /`. If the user does not exist, respond with a 403 HTTP status.
