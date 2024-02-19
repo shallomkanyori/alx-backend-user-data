@@ -149,3 +149,10 @@ Otherwise, create a new session for the user, store it the session ID as a cooki
 ```
 {"email": "<user email>", "message": "logged in"}
 ```
+
+### Task 12
+Implement the `Auth.get_user_from_session_id` method. It takes a single `session_id` string argument and returns the corresponding `User` or `None`.
+
+If the session ID is `None` or no user is found, return `None`. Otherwise return the corresponding user.
+
+Remember to only use public methods of `self._db`.
