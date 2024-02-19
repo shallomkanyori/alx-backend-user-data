@@ -126,3 +126,8 @@ and return a 400 status code
 Implement the `Auth.valid_login` method. It should expect `email` and `password` required arguments and return a boolean.
 
 Try locating the user by email. If it exists, check the password with `bcrypt.checkpw`. If it matches return `True`. In any other case, return `False`.
+
+### Task 9
+Implement a `_generate_uuid` function in the `auth` module. The function should return a string representation of a new UUID. Use the `uuid` module.
+
+Note that the method is private to the `auth` module and should NOT be used outside of it.

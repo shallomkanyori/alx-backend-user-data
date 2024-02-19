@@ -3,11 +3,14 @@
 
 Functions:
     _hash_password
+    _generate_uuid
 
 Classes:
     Auth
 """
 import bcrypt
+import uuid
+
 from db import DB
 from user import User
 
@@ -18,6 +21,12 @@ def _hash_password(password: str) -> bytes:
     """Returns hashed password"""
 
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+
+
+def _generate_uuid() -> str:
+    """Returns new UUID as a string"""
+
+    return str(uuid.uuid4())
 
 
 class Auth:
