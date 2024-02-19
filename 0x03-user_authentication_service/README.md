@@ -121,3 +121,8 @@ If the user is already registered, catch the exception and return a JSON payload
 {"message": "email already registered"}
 ```
 and return a 400 status code
+
+### Task 8
+Implement the `Auth.valid_login` method. It should expect `email` and `password` required arguments and return a boolean.
+
+Try locating the user by email. If it exists, check the password with `bcrypt.checkpw`. If it matches return `True`. In any other case, return `False`.
