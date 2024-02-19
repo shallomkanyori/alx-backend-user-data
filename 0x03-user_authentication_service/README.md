@@ -184,3 +184,13 @@ If the session ID is invalid or the user does not exist, respond with a 403 HTTP
 Implement the `Auth.get_reset_password_token` method. It takes an `email` string argument and returns a string.
 
 Find the user corresponding to the email. If the user does not exist, raise a `ValueError` exception. If it exists, generate a UUID and update the user’s `reset_token` database field. Return the token.
+
+### Task 17
+Implement a `get_reset_password_token` function to respond to the `POST /reset_password` route.
+
+The request is expected to contain form data with the `"email"` field.
+
+If the email is not registered, respond with a 403 status code. Otherwise, generate a token and respond with a 200 HTTP status and the following JSON payload:
+```
+{"email": "<user email>", "reset_token": "<reset token>"}
+```
