@@ -95,7 +95,7 @@ def update_password() -> str:
     """Updates a user's password"""
 
     email = request.form.get("email")
-    password = request.form.get("password")
+    password = request.form.get("new_password")
     reset_token = request.form.get("reset_token")
 
     try:
