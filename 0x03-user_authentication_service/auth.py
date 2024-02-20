@@ -84,7 +84,7 @@ class Auth:
 
         return user
 
-    def destory_session(self, user_id: int) -> None:
+    def destroy_session(self, user_id: int) -> None:
         """Destroys a session for a given user"""
 
         self._db.update_user(user_id, **{"session_id": None})
