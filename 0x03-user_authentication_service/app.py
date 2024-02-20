@@ -99,7 +99,7 @@ def update_password() -> str:
     reset_token = request.form.get("reset_token")
 
     try:
-        Auth.update_password(reset_token, password)
+        AUTH.update_password(reset_token, password)
 
         return jsonify({"email": email, "message": "Password updated"})
 

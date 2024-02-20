@@ -10,7 +10,7 @@ def register_user(email: str, password: str) -> None:
     response = requests.post(url, data={"email": email, "password": password})
     assert response.status_code == 200
 
-    rj = response.json
+    rj = response.json()
     assert rj["email"] == email
     assert rj["message"] == "user created"
 
@@ -32,7 +32,7 @@ def log_in(email: str, password: str) -> str:
 
     assert response.status_code == 200
 
-    rj = response.json
+    rj = response.json()
     assert rj["email"] == email
     assert rj["message"] == "logged in"
 
@@ -56,7 +56,7 @@ def profile_logged(session_id: str) -> None:
 
     assert response.status_code == 200
 
-    rj = response.json
+    rj = response.json()
     assert rj["email"] is not None
 
 
@@ -66,7 +66,11 @@ def log_out(session_id: str) -> None:
     url = "http://localhost:5000/sessions"
     response = requests.delete(url, cookies={"session_id": session_id})
 
-    assert response.status_code == 302
+    # assert that we were redirected to GET /
+    assert response.status_code == 200
+
+    rj = response.json()
+    assert rj["message"] == "Bienvenue"
 
 
 def reset_password_token(email: str) -> str:
@@ -77,7 +81,7 @@ def reset_password_token(email: str) -> str:
 
     assert response.status_code == 200
 
-    rj = response.json
+    rj = response.json()
     assert rj["email"] == email
     assert rj["reset_token"] is not None
 
@@ -88,13 +92,15 @@ def update_password(email: str, reset_token: str, new_password: str) -> None:
     """Tests updating a password"""
 
     url = "http://localhost:5000/reset_password"
-    response = requests.post(url, data={"email": email,
-                                        "reset_token": reset_token,
-                                        "new_password": new_password})
+    payload = {"email": email,
+               "reset_token": reset_token,
+               "new_password": new_password}
+
+    response = requests.put(url, data=payload)
 
     assert response.status_code == 200
 
-    rj = response.json
+    rj = response.json()
     assert rj["email"] == email
     assert rj["message"] == "Password updated"
 

@@ -45,7 +45,7 @@ class DB:
     def find_user_by(self, *args, **kwargs) -> User:
         """Returns first user based on **kwargs"""
 
-        if any(getattr(User, k, None) is None for k in kwargs):
+        if any((not hasattr(User, k)) for k in kwargs):
             raise InvalidRequestError
 
         user = self._session.query(User).filter_by(**kwargs).first()
@@ -61,7 +61,7 @@ class DB:
         if user is None:
             return None
 
-        if any(getattr(User, k, None) is None for k in kwargs):
+        if any((not hasattr(User, k)) for k in kwargs):
             raise ValueError
 
         for k, v in kwargs.items():
